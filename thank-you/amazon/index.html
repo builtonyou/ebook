@@ -76,8 +76,8 @@
     var status = (q.get("status") || "").toLowerCase();
     var email = q.get("email") || "";
     var p = "amazon";
-    var names = { walmart: "Walmart Playbook", amazon: "Amazon Playbook" };
-    var pages = { walmart: "../../walmart-playbook/", amazon: "../../amazon-playbook/" };
+    var names = { walmart: "Walmart Playbook", amazon: "Amazon Playbook", toyota: "Toyota Playbook" };
+    var pages = { walmart: "../../walmart-playbook/", amazon: "../../amazon-playbook/", toyota: "../../toyota-playbook/" };
     if (names[p]) document.getElementById("prod").textContent = names[p];
     if (email) { document.getElementById("em").textContent = email; document.getElementById("em2").textContent = email; }
     else { document.getElementById("to").style.display = "none"; document.getElementById("to2").style.display = "none"; }
