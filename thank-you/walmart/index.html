@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Thank you — Built On You</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
+<link rel="stylesheet" href="../../assets/books.css">
+<style>
+  .ty{max-width:640px;margin:0 auto;text-align:center}
+  .ty .tick{width:72px;height:72px;border-radius:50%;background:var(--green);color:#fff;font-size:40px;line-height:72px;margin:0 auto 14px;font-weight:800}
+  .ty .tick.wait{background:var(--spark);color:var(--ink)}
+  .ty .tick.bad{background:var(--red)}
+  .steps{text-align:left;margin:22px 0;display:grid;gap:12px}
+  .steps .card p{margin:4px 0 0;font-size:15.5px}
+  .email{font-weight:700;word-break:break-all}
+  .ty .btn{display:inline-block;margin-top:6px}
+</style>
+<script data-goatcounter="https://builtonyou.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+<div class="wrap"><nav><a class="logo" href="../../reading-list/">BUILT ON YOU</a><a class="small" href="https://www.youtube.com/@builtonyou">YouTube →</a></nav></div>
+
+<section style="padding-top:20px">
+  <div class="wrap ty">
+
+    <!-- success -->
+    <div id="ok">
+      <div class="tick">✓</div>
+      <div class="kicker">Payment received</div>
+      <h1 style="font-size:clamp(30px,6vw,46px)">Thank you! Your <span id="prod">playbook</span> is on its way.</h1>
+      <p class="lead">We've emailed your download link<span id="to"> to <span class="email" id="em"></span></span>. It usually arrives within a minute.</p>
+
+      <div class="steps">
+        <div class="card"><b>1 · Check your inbox</b><p>Look for an email from <b>Dodo Payments</b>, our payment partner, with your order receipt. Click the download button in it to save the PDF.</p></div>
+        <div class="card"><b>2 · Can't see it?</b><p>Check your <b>Spam</b> or <b>Promotions</b> folder. Then search your inbox for "Dodo Payments".</p></div>
+        <div class="card"><b>3 · Download again any time</b><p>Your purchase is saved in your customer portal. Enter the email you paid with and you'll get a sign-in link with your downloads.</p>
+          <a class="btn" style="font-size:16px;padding:12px 22px" href="https://customer.dodopayments.com/login/bus_0NpWqRMNYdsD3MDfqXzE2" data-goatcounter-click="thank-you/portal">Open my downloads →</a></div>
+      </div>
+
+      <p class="small" style="color:var(--soft)">Tip: on a phone, the PDF opens best in your Files or Books app. Save it there so the worksheets are easy to find.</p>
+      <p style="margin-top:22px"><a href="../../reading-list/">While you wait: the books behind the videos →</a></p>
+    </div>
+
+    <!-- not completed -->
+    <div id="fail" style="display:none">
+      <div class="tick bad">!</div>
+      <div class="kicker">Payment not completed</div>
+      <h1 style="font-size:clamp(30px,6vw,44px)">Your payment didn't go through</h1>
+      <p class="lead">No money was taken for this order. You can try again with the same or a different card.</p>
+      <a class="btn" id="retry" href="../../reading-list/">Try again →</a>
+    </div>
+
+    <!-- processing -->
+    <div id="wait" style="display:none">
+      <div class="tick wait">…</div>
+      <div class="kicker">Almost there</div>
+      <h1 style="font-size:clamp(30px,6vw,44px)">Your payment is still processing</h1>
+      <p class="lead">Some payment methods take a few minutes. As soon as it's confirmed, your download link is emailed to you<span id="to2"> at <span class="email" id="em2"></span></span>.</p>
+      <a class="btn" style="font-size:16px;padding:12px 22px" href="https://customer.dodopayments.com/login/bus_0NpWqRMNYdsD3MDfqXzE2">Check my downloads →</a>
+    </div>
+
+    <p class="small" style="margin-top:34px;color:var(--soft)">Questions about your order? Your receipt email from Dodo Payments has your order details and support options.</p>
+  </div>
+</section>
+
+<footer><div class="wrap">BUILT ON YOU · Business history, rebuilt for builders.</div></footer>
+
+<script>
+  (function () {
+    var q = new URLSearchParams(location.search);
+    var status = (q.get("status") || "").toLowerCase();
+    var email = q.get("email") || "";
+    var p = "walmart";
+    var names = { walmart: "Walmart Playbook", amazon: "Amazon Playbook" };
+    var pages = { walmart: "../../walmart-playbook/", amazon: "../../amazon-playbook/" };
+    if (names[p]) document.getElementById("prod").textContent = names[p];
+    if (email) { document.getElementById("em").textContent = email; document.getElementById("em2").textContent = email; }
+    else { document.getElementById("to").style.display = "none"; document.getElementById("to2").style.display = "none"; }
+    if (pages[p]) document.getElementById("retry").href = pages[p];
+    var show = function (id) { ["ok", "fail", "wait"].forEach(function (x) { document.getElementById(x).style.display = x === id ? "" : "none"; }); };
+    if (status === "failed" || status === "cancelled") show("fail");
+    else if (status === "processing" || status === "requires_payment_method" || status === "requires_customer_action") show("wait");
+    else show("ok");
+  })();
+</script>
+</body>
+</html>
